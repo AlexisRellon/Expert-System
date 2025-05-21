@@ -1,4 +1,3 @@
-
 // Define violation rules with fines and imprisonment
 const dictionary = {
     'Sec.25': { desc: 'Unauthorized processing of personal data', fine: '₱500,000–₱1,000,000', imprisonment: '1–3 years' },
@@ -120,6 +119,18 @@ let should_check_disclosure = false;
 let category_finished = false;
 let prevAnswer = '';
 
+// Function to validate numeric input before submitting
+function validateNumber() {
+    const input = document.getElementById('number-input');
+    const value = parseInt(input.value);
+    
+    if (value < 0) {
+        input.value = 0;
+        return false;
+    }
+    return true;
+}
+
 // DOM function to switch between sections smoothly
 function switchSection(fromId, toId) {
     const fromSection = document.getElementById(fromId);
@@ -185,6 +196,7 @@ function displayCurrentQuestion() {
     yesNoButtons.style.display = 'none';
     choiceButtons.style.display = 'none';
     numericInput.style.display = 'none';
+    numericInput.classList.add('section-hidden');
     yesnoTip.style.display = 'none';
     choiceTip.style.display = 'none';
     numericTip.style.display = 'none';
@@ -194,8 +206,18 @@ function displayCurrentQuestion() {
     let options = [];
     
     // Determine the current question based on question_type
+    // Skip the general question for Final Questions category
     if (question_type === 'general') {
-        currentQuestion = current_category.general;
+        if (current_category.name === 'Final Questions') {
+            // Skip to sections directly
+            question_type = 'sections';
+            current_question_index = 0;
+            if (current_category.sections && current_category.sections.length > 0) {
+                currentQuestion = current_category.sections[current_question_index].question;
+            }
+        } else {
+            currentQuestion = current_category.general;
+        }
     } else if (question_type === 'general_questions') {
         if (current_category.general_questions && current_question_index < current_category.general_questions.length) {
             const q = current_category.general_questions[current_question_index];
@@ -210,6 +232,17 @@ function displayCurrentQuestion() {
     } else if (question_type === 'follow_up') {
         if (current_category.follow_up && current_question_index < current_category.follow_up.length) {
             const q = current_category.follow_up[current_question_index];
+            // Special logic: Only show the 'how many individuals' question if the previous answer was 'yes'
+            if (q.type === 'number' && current_question_index > 0) {
+                // Get the previous answer
+                const prevAnswer = follow_up_answers[current_category.name]?.[current_question_index - 1];
+                if (prevAnswer !== 'yes') {
+                    // Skip this question and move to the next follow_up
+                    current_question_index++;
+                    displayCurrentQuestion();
+                    return;
+                }
+            }
             currentQuestion = q.question;
             questionType = q.type || 'yesno';
             options = q.options || [];
@@ -250,6 +283,7 @@ function displayCurrentQuestion() {
         }
     } else if (questionType === 'number') {
         numericInput.style.display = 'block';
+        numericInput.classList.remove('section-hidden');
         numericTip.style.display = 'inline';
         document.getElementById('number-input').value = '';
         document.getElementById('number-input').focus();
@@ -258,10 +292,30 @@ function displayCurrentQuestion() {
 
 // Process the user's answer and determine the next question
 function processAnswer(answer) {
-    const current_category = categories[current_category_index];
-    
-    // Save the answer for use in flow logic
+    // Save the previous answer for reference
     prevAnswer = answer;
+    
+    const current_category = categories[current_category_index];
+    let currentQuestion = null;
+    
+    // Determine current question based on question_type
+    if (question_type === 'general_questions' && current_category.general_questions) {
+        currentQuestion = current_category.general_questions[current_question_index];
+    } else if (question_type === 'follow_up' && current_category.follow_up) {
+        currentQuestion = current_category.follow_up[current_question_index];
+    }
+
+    // If it's a numeric question and the previous answer was 'no', skip the number input
+    if (currentQuestion?.type === 'number' && prevAnswer === 'no') {
+        answer = '0';
+    }
+    
+    // Special handling for numeric input validation
+    if (currentQuestion?.type === 'number' && answer !== '0') {
+        if (!validateNumber()) {
+            return; // Don't proceed if validation fails
+        }
+    }
     
     // Process the answer based on question_type
     if (question_type === 'general') {
@@ -342,22 +396,35 @@ function processAnswer(answer) {
         follow_up_answers[current_category.name].push(answer);
         
         // Process follow-up answers
-        const q = current_category.follow_up[current_question_index].question.toLowerCase();
-        
-        if (q.includes('sensitive personal information') && answer === 'yes') {
+        const q_data = current_category.follow_up[current_question_index]; // Current question being processed
+        const q_text = q_data.question.toLowerCase();
+
+        if (q_text.includes('sensitive personal information') && answer === 'yes') {
             has_sensitive_info = true;
             if (current_category.name === 'Personal/Sensitive Information') {
                 should_check_breach = true;
             }
-        } else if (q.includes('how many individuals')) {
-            // Only process if previous answer was 'yes'
-            if (prevAnswer === 'yes') {
-                const affected = parseInt(answer);
-                total_affected_individuals = Math.max(total_affected_individuals, affected);
-                if (affected > 1000) {
-                    is_large_scale = true;
+        } else if (q_text.includes('how many individuals')) { // This is the "how many individuals" question itself. 'answer' is the number.
+            // We need the answer to the *previous* question ("Did the disclosure affect multiple individuals?")
+            let previousYesNoAnswer = '';
+            if (current_question_index > 0 &&
+                follow_up_answers[current_category.name] &&
+                follow_up_answers[current_category.name].length > current_question_index 
+                ) {
+                previousYesNoAnswer = follow_up_answers[current_category.name][current_question_index -1];
+            }
+
+            if (previousYesNoAnswer === 'yes') {
+                const affected = parseInt(answer); // 'answer' is the number entered for "how many"
+                if (!isNaN(affected) && affected >= 0) { 
+                    total_affected_individuals = Math.max(total_affected_individuals, affected);
+                    if (affected > 1000) {
+                        is_large_scale = true;
+                    }
                 }
             }
+            // If previousYesNoAnswer was 'no', the question "how many individuals" was still asked.
+            // The value entered is not used to update total_affected_individuals.
         }
         
         // Move to the next follow_up question or to the next category
@@ -600,7 +667,7 @@ function generateReport() {
             `;
         }
     }
-      // Generate the full detailed report
+    // Generate the full detailed report
     generateFullReport(severity_level);
     
     // Reset display states
