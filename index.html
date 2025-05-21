@@ -160,11 +160,10 @@
                     <div class="flex items-center space-x-3 mb-6">
                         <div class="h-8 w-1 bg-court-primary rounded"></div>
                         <h2 class="text-2xl font-serif text-court-primary">User Information</h2>
-                    </div>
-                      <div class="relative">
+                    </div>                    <div class="relative">
                         <input autofocus type="text" id="username" placeholder=" " 
                             class="peer w-full p-4 border-b-2 border-gray-300 text-gray-700 focus:outline-none focus:border-court-primary bg-gray-50 rounded-t-md transition-all">
-                        <label for="username" class="absolute left-4 top-4 text-gray-500 transition-all peer-focus:-top-5 peer-focus:text-sm peer-focus:text-court-primary peer-[:not(:placeholder-shown)]:-top-5 peer-[:not(:placeholder-shown)]:text-sm">Enter your name (e.g. John Doe)</label>
+                        <label for="username" class="absolute left-4 top-4 text-gray-500 transition-all peer-focus:-top-5 peer-focus:text-sm peer-focus:text-court-primary peer-[:not(:placeholder-shown)]:-top-5 peer-[:not(:placeholder-shown)]:text-sm">Enter Subject/Defendant/Violator name (e.g. John Doe)</label>
                     </div>
                     
                     <div class="text-sm text-gray-500 italic flex items-center space-x-2 mb-3">
@@ -252,12 +251,28 @@
                 </div>
 
                 <!-- Numeric Input Section -->
-                <div id="numeric-input" style="display: none;" class="space-y-4">
-                    <input type="number" id="number-input" placeholder="Enter number" 
-                           class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-court-secondary focus:border-court-secondary">
+                <div id="numeric-input" class="space-y-6 section-transition section-hidden">
+                    <div class="relative">
+                        <input type="number" id="number-input" placeholder=" " min="0"
+                            class="peer w-full p-4 border-b-2 border-gray-300 text-gray-700 focus:outline-none focus:border-court-primary bg-gray-50 rounded-t-md transition-all">
+                        <label for="number-input" class="absolute left-4 top-4 text-gray-500 transition-all peer-focus:-top-5 peer-focus:text-sm peer-focus:text-court-primary peer-[:not(:placeholder-shown)]:-top-5 peer-[:not(:placeholder-shown)]:text-sm">Enter number of individuals affected</label>
+                    </div>
+                    
+                    <div class="text-sm text-gray-500 italic flex items-center space-x-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 9v4M12 17h.01"/>
+                            <circle cx="12" cy="12" r="10"/>
+                        </svg>
+                        <span>Only non-negative numbers are allowed</span>
+                    </div>
+                    
                     <button onclick="submitNumber()" 
-                            class="w-full bg-court-secondary text-white py-3 px-6 rounded-lg hover:bg-blue-600 transition duration-300 ripple-button">
-                        Submit
+                            class="w-full bg-court-primary text-white py-4 px-6 rounded-md hover:bg-court-secondary transition duration-300 flex items-center justify-center space-x-2 group">
+                        <span>Submit</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14"></path>
+                            <path d="m12 5 7 7-7 7"></path>
+                        </svg>
                     </button>
                 </div>                <!-- Report Section -->
                 <div id="report-section" class="space-y-8 section-transition section-hidden">
