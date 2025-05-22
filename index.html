@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RA 10173 Legal Assessment System</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap">    <script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap">
+    
+    <!-- favicon -->
+    <link rel="icon" href="favicon.png" type="image/x-icon">
+    <script>
         tailwind.config = {
             theme: {
                 extend: {
@@ -60,22 +64,18 @@
             pointer-events: none;
             position: absolute;
         }
-        /* Detailed report section styling */
-        #detailed-report {
-            display: none;
-        }
         /* Visible state for sections */
         .section-visible {
             opacity: 1;
             transform: translateY(0);
             position: relative;
         }
-        /* Animation for report cards */
-        .report-card {
+        /* Animation for cards */
+        .feature-card {
             transition: all 0.3s ease;
             transform-origin: top center;
         }
-        .report-card:hover {
+        .feature-card:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
@@ -122,7 +122,6 @@
         }
         /* Court-like styling for header */
         header {
-            /* border-bottom: 4px solid #3498db; */
             padding-bottom: 1rem;
         }
         /* Decorative top bar resembling a judge's bench */
@@ -134,7 +133,8 @@
     </style>
 </head>
 <body class="min-h-screen font-sans">
-    <div class="container mx-auto px-4 py-12 max-w-4xl">        <!-- Header with gavel icon and court-like styling -->
+    <div class="container mx-auto px-4 py-12 max-w-5xl">
+        <!-- Header with gavel icon and court-like styling -->
         <header class="mb-10 text-center animate-fadeIn">
             <div class="flex justify-center mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-court-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -153,238 +153,134 @@
             </div>
         </header>
 
-        <!-- Main content card with subtle shadow and border -->
-        <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden animate-scaleIn">
+        <!-- Hero Section with split layout -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden animate-scaleIn mb-12">
             <!-- Decorative top bar resembling a judge's bench -->
             <div class="h-2 bg-gradient-to-r from-court-primary via-court-secondary to-court-primary"></div>
             
-            <div class="p-8">                <div id="user-info" class="space-y-6 section-transition section-visible">
-                    <div class="flex items-center space-x-3 mb-6">
-                        <div class="h-8 w-1 bg-court-primary rounded"></div>
-                        <h2 class="text-2xl font-serif text-court-primary">User Information</h2>
-                    </div>                    <div class="relative">
-                        <input autofocus type="text" id="username" placeholder=" " 
-                            class="peer w-full p-4 border-b-2 border-gray-300 text-gray-700 focus:outline-none focus:border-court-primary bg-gray-50 rounded-t-md transition-all">
-                        <label for="username" class="absolute left-4 top-4 text-gray-500 transition-all peer-focus:-top-5 peer-focus:text-sm peer-focus:text-court-primary peer-[:not(:placeholder-shown)]:-top-5 peer-[:not(:placeholder-shown)]:text-sm">Enter Subject/Defendant/Violator name (e.g. John Doe)</label>
+            <div class="flex flex-col md:flex-row">
+                <!-- Left side with content -->
+                <div class="p-8 md:w-1/2 flex flex-col justify-center">
+                    <h2 class="text-3xl font-serif text-court-primary mb-4">Data Privacy Act Expert System</h2>
+                    <p class="text-gray-600 mb-6">An intelligent legal assessment tool that helps determine violations and penalties under Republic Act 10173. Get a comprehensive analysis of potential privacy breaches and their legal implications.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-gray-700">Accurate legal assessment</span>
+                        </div>
+                        <div class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-gray-700">Comprehensive legal reports</span>
+                        </div>
+                        <div class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-gray-700">Based on current laws and IRR</span>
+                        </div>
                     </div>
                     
-                    <div class="text-sm text-gray-500 italic flex items-center space-x-2 mb-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect width="20" height="16" x="2" y="4" rx="2"></rect>
-                            <path d="M6 8h.01"></path>
-                            <path d="M10 8h.01"></path>
-                            <path d="M14 8h.01"></path>
-                            <path d="M18 8h.01"></path>
-                            <path d="M8 12h.01"></path>
-                            <path d="M12 12h.01"></path>
-                            <path d="M16 12h.01"></path>
-                            <path d="M7 16h10"></path>
-                        </svg>
-                        <span>Press <kbd class="px-1.5 py-0.5 bg-white rounded border border-gray-300 text-xs font-mono">Enter</kbd> to start assessment</span>
-                    </div>
-                    
-                    <button onclick="startAssessment()" 
-                            class="w-full bg-court-primary text-white py-4 px-6 rounded-md hover:bg-court-secondary transition duration-300 flex items-center justify-center space-x-2 group ripple-button">
-                        <span>Start Assessment</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M5 12h14"></path>
-                            <path d="m12 5 7 7-7 7"></path>
-                        </svg>
-                    </button>
+                    <a href="analysis.html" class="mt-8 inline-block bg-court-primary text-white py-3 px-6 rounded-md hover:bg-court-secondary transition duration-300 ripple-button">
+                        Start Assessment
+                    </a>
                 </div>
                 
-                <!-- Question Section -->                <div id="question-section" class="space-y-6 section-transition section-hidden">
-                    <div class="flex items-center space-x-3 mb-6">
-                        <div class="h-8 w-1 bg-court-primary rounded"></div>
-                        <h2 id="category-title" class="text-2xl font-serif text-court-primary"></h2>
-                    </div>
-                    
-                    <div id="question-container" class="space-y-6">
-                        <div class="bg-gray-50 p-6 rounded-md border-l-4 border-court-primary">
-                            <p id="current-question" class="text-lg text-gray-700"></p>
-                        </div>
-                        
-                        <!-- Keyboard Shortcuts Tip -->
-                        <div id="keyboard-tip" class="text-sm text-gray-500 italic flex items-center space-x-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect width="20" height="16" x="2" y="4" rx="2"></rect>
-                                <path d="M6 8h.01"></path>
-                                <path d="M10 8h.01"></path>
-                                <path d="M14 8h.01"></path>
-                                <path d="M18 8h.01"></path>
-                                <path d="M8 12h.01"></path>
-                                <path d="M12 12h.01"></path>
-                                <path d="M16 12h.01"></path>
-                                <path d="M7 16h10"></path>
-                            </svg>
-                            <span id="yesno-tip">Keyboard shortcuts: Press <kbd class="px-1.5 py-0.5 bg-white rounded border border-gray-300 text-xs font-mono">Y</kbd> for Yes, <kbd class="px-1.5 py-0.5 bg-white rounded border border-gray-300 text-xs font-mono">N</kbd> for No</span>
-                            <span id="choice-tip" class="hidden">Keyboard shortcuts: Press <kbd class="px-1.5 py-0.5 bg-white rounded border border-gray-300 text-xs font-mono">1</kbd> - <kbd class="px-1.5 py-0.5 bg-white rounded border border-gray-300 text-xs font-mono">3</kbd> for choices</span>
-                            <span id="numeric-tip" class="hidden">Press <kbd class="px-1.5 py-0.5 bg-white rounded border border-gray-300 text-xs font-mono">Enter</kbd> to submit</span>
-                        </div>
-                        
-                        <!-- Yes/No Buttons -->
-                        <div id="yesno-buttons" class="flex space-x-4">
-                            <button onclick="answerQuestion('yes')" 
-                                    class="flex-1 bg-white border-2 border-green-600 text-green-600 py-3 px-6 rounded-md hover:bg-green-600 hover:text-white transition duration-300 font-medium ripple-button">
-                                Yes
-                            </button>
-                            <button onclick="answerQuestion('no')" 
-                                    class="flex-1 bg-white border-2 border-red-600 text-red-600 py-3 px-6 rounded-md hover:bg-red-600 hover:text-white transition duration-300 font-medium ripple-button">
-                                No
-                            </button>
-                        </div>
-                        
-                        <!-- Choice Buttons -->
-                        <div id="choice-buttons" class="hidden space-y-3">
-                            <button onclick="answerChoice(1)" 
-                                    class="w-full bg-white border-2 border-court-primary text-court-primary py-3 px-6 rounded-md hover:bg-court-primary hover:text-white transition duration-300 text-left pl-4 font-medium ripple-button">
-                                <span class="inline-block w-6 h-6 rounded-full bg-court-primary text-white text-center mr-2">1</span> Organization
-                            </button>
-                            <button onclick="answerChoice(2)" 
-                                    class="w-full bg-white border-2 border-court-primary text-court-primary py-3 px-6 rounded-md hover:bg-court-primary hover:text-white transition duration-300 text-left pl-4 font-medium ripple-button">
-                                <span class="inline-block w-6 h-6 rounded-full bg-court-primary text-white text-center mr-2">2</span> Employee
-                            </button>
-                            <button onclick="answerChoice(3)" 
-                                    class="w-full bg-white border-2 border-court-primary text-court-primary py-3 px-6 rounded-md hover:bg-court-primary hover:text-white transition duration-300 text-left pl-4 font-medium ripple-button">
-                                <span class="inline-block w-6 h-6 rounded-full bg-court-primary text-white text-center mr-2">3</span> Third Party
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Numeric Input Section -->
-                <div id="numeric-input" class="mt-8 space-y-6 section-transition section-hidden">
-                    <div class="relative">
-                        <input type="number" id="number-input" placeholder=" " min="0"
-                            class="peer w-full p-4 border-b-2 border-gray-300 text-gray-700 focus:outline-none focus:border-court-primary bg-gray-50 rounded-t-md transition-all">
-                        <label for="number-input" class="absolute left-4 top-4 text-gray-500 transition-all peer-focus:-top-5 peer-focus:text-sm peer-focus:text-court-primary peer-[:not(:placeholder-shown)]:-top-5 peer-[:not(:placeholder-shown)]:text-sm">Enter number of individuals affected</label>
-                    </div>
-                    
-                    <div class="text-sm text-gray-500 italic flex items-center space-x-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 9v4M12 17h.01"/>
-                            <circle cx="12" cy="12" r="10"/>
-                        </svg>
-                        <span>Only non-negative numbers are allowed</span>
-                    </div>
-                    
-                    <button onclick="submitNumber()" 
-                            class="w-full bg-court-primary text-white py-4 px-6 rounded-md hover:bg-court-secondary transition duration-300 flex items-center justify-center space-x-2 group">
-                        <span>Submit</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M5 12h14"></path>
-                            <path d="m12 5 7 7-7 7"></path>
-                        </svg>
-                    </button>
-                </div>                <!-- Report Section -->
-                <div id="report-section" class="space-y-8 section-transition section-hidden">
-                    <div class="flex items-center space-x-3 mb-6">
-                        <div class="h-8 w-1 bg-court-primary rounded"></div>
-                        <h2 class="text-2xl font-serif text-court-primary">Legal Assessment Report</h2>
-                    </div>
-                    
-                    <!-- Initial Facts Section -->
-                    <div id="facts-section" class="space-y-6">
-                        <div class="bg-gray-50 rounded-md overflow-hidden border border-gray-200 report-card">
-                            <!-- Report Header with Seal-like Design -->
-                            <div class="bg-court-primary text-white p-4 flex justify-between items-center">
-                                <div class="flex items-center space-x-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <circle cx="12" cy="12" r="10"></circle>
-                                        <path d="M12 8v4l2 2"></path>
-                                    </svg>
-                                    <h3 class="text-lg font-serif tracking-wide">CONFIDENTIAL</h3>
-                                </div>
-                                <span id="report-date" class="text-sm"></span>
-                            </div>
-                            
-                            <div class="p-6">
-                                <div class="space-y-4">
-                                    <h4 class="text-lg font-serif text-court-primary border-b border-gray-200 pb-2">STATEMENT OF FACTS</h4>
-                                    <div id="facts-content" class="prose prose-sm max-w-none text-gray-700 leading-relaxed"></div>
-                                </div>
-                            </div>
-                        </div>                        <div class="flex justify-center">
-                            <button onclick="showFullReport()" 
-                                    class="bg-court-primary text-white py-2 px-6 rounded-lg hover:bg-court-secondary transition duration-300 flex items-center space-x-2 ripple-button">
-                                <span>View Full Detailed Report</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Full Detailed Report Section -->
-                    <div id="full-report" class="hidden space-y-6">
-                        <div id="detailed-report">
-                            <!-- Violations Summary -->
-                        <div class="bg-white border-l-4 border-yellow-500 p-4 shadow-md">
-                            <h3 class="text-lg font-semibold text-gray-800 mb-3">SUMMARY OF VIOLATIONS</h3>
-                            <div id="violations-content" class="space-y-4"></div>
-                        </div>
-
-                        <!-- Cumulative Penalties -->
-                        <div class="bg-white border-l-4 border-red-500 p-4 shadow-md">
-                            <h3 class="text-lg font-semibold text-gray-800 mb-3">CUMULATIVE PENALTIES</h3>
-                            <div id="penalties-content" class="space-y-2"></div>
-                        </div>
-
-                        <!-- Special Considerations -->
-                        <div class="bg-white border-l-4 border-purple-500 p-4 shadow-md">
-                            <h3 class="text-lg font-semibold text-gray-800 mb-3">SPECIAL CONSIDERATIONS</h3>
-                            <div id="considerations-content" class="space-y-2"></div>
-                        </div>
-
-                        <!-- IRR References -->
-                        <div class="bg-white border-l-4 border-green-500 p-4 shadow-md">
-                            <h3 class="text-lg font-semibold text-gray-800 mb-3">IRR REFERENCES AND GUIDELINES</h3>
-                            <div id="irr-content" class="space-y-2"></div>
-                        </div>
-
-                        <!-- Compliance Recommendations -->
-                        <div class="bg-white border-l-4 border-indigo-500 p-4 shadow-md">
-                            <h3 class="text-lg font-semibold text-gray-800 mb-3">COMPLIANCE RECOMMENDATIONS</h3>
-                            <div id="recommendations-content" class="space-y-2"></div>
-                        </div>
-
-                        <!-- NPC Requirements -->
-                        <div class="bg-white border-l-4 border-orange-500 p-4 shadow-md">
-                            <h3 class="text-lg font-semibold text-gray-800 mb-3">NPC NOTIFICATION REQUIREMENTS</h3>
-                            <div id="npc-content" class="space-y-2"></div>
-                        </div>                        <!-- International Transfer Requirements (if applicable) -->
-                        <div id="international-section" class="bg-white border-l-4 border-teal-500 p-4 shadow-md hidden">
-                            <h3 class="text-lg font-semibold text-gray-800 mb-3">INTERNATIONAL DATA TRANSFER REQUIREMENTS</h3>
-                            <div id="international-content" class="space-y-2"></div>
-                        </div>                        <!-- Generate New Report Button -->
-                        <div class="flex justify-center pt-4">
-                            <button onclick="generateNewReport()" 
-                                    class="bg-court-secondary text-white py-3 px-8 rounded-lg hover:bg-court-primary transition duration-300 ripple-button">
-                                Generate New Report
-                            </button>
-                        </div>
-                        </div>
-                    </div>
+                <!-- Right side with animation -->
+                <div class="p-8 md:w-1/2 flex items-center justify-center">
+                    <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+                    <dotlottie-player src="https://lottie.host/0a3d7a02-27a3-47a7-9ee5-4b6b3386e4eb/Y5uwHEPDy1.lottie" background="transparent" speed="1" style="width: 300px; height: 300px" loop autoplay></dotlottie-player>
                 </div>
             </div>
-          <!-- Footer with decorative elements -->
-        <footer class="p-5 text-center animate-fadeIn" style="animation-delay: 0.3s;">
-            <div class="flex justify-center items-center mb-4">
-                <div class="h-px bg-court-accent w-16"></div>
-                <div class="px-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-court-primary mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z"></path>
-                        <path d="M12 8v4"></path>
-                        <path d="M12 16h.01"></path>
+        </div>
+
+        <!-- Features Section -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <!-- Feature 1 -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 feature-card">
+                <div class="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                     </svg>
                 </div>
-                <div class="h-px bg-court-accent w-16"></div>
+                <h3 class="text-xl font-serif text-court-primary mb-2">Privacy Assessment</h3>
+                <p class="text-gray-600">Evaluates potential violations of data privacy laws based on specific case details and circumstances.</p>
             </div>
-            <p class="text-gray-600 text-sm font-light">Disclaimer: This system is for informational purposes only and does not constitute legal advice.</p>
+            
+            <!-- Feature 2 -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 feature-card">
+                <div class="w-12 h-12 bg-green-50 rounded-lg flex items-center justify-center mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-serif text-court-primary mb-2">Penalty Calculation</h3>
+                <p class="text-gray-600">Provides accurate penalty estimates based on the nature and severity of data privacy violations.</p>
+            </div>
+            
+            <!-- Feature 3 -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 feature-card">
+                <div class="w-12 h-12 bg-purple-50 rounded-lg flex items-center justify-center mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-serif text-court-primary mb-2">Detailed Reports</h3>
+                <p class="text-gray-600">Generates comprehensive legal assessments with supporting legal provisions and references.</p>
+            </div>
+        </div>
+
+        <!-- How It Works Section -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden p-8 mb-12">
+            <h2 class="text-2xl font-serif text-court-primary mb-6 text-center">How It Works</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Step 1 -->
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-12 h-12 bg-court-primary rounded-full flex items-center justify-center text-white font-bold text-lg mb-4">1</div>
+                    <h3 class="text-lg font-medium text-court-primary mb-2">Enter Information</h3>
+                    <p class="text-gray-600">Provide basic details about the case and the parties involved.</p>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-12 h-12 bg-court-primary rounded-full flex items-center justify-center text-white font-bold text-lg mb-4">2</div>
+                    <h3 class="text-lg font-medium text-court-primary mb-2">Answer Questions</h3>
+                    <p class="text-gray-600">Respond to a series of questions about the alleged privacy violation.</p>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-12 h-12 bg-court-primary rounded-full flex items-center justify-center text-white font-bold text-lg mb-4">3</div>
+                    <h3 class="text-lg font-medium text-court-primary mb-2">Get Assessment</h3>
+                    <p class="text-gray-600">Receive a detailed legal assessment with applicable laws and penalties.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="bg-court-primary rounded-lg shadow-lg overflow-hidden mb-12">
+            <div class="p-8 text-center">
+                <h2 class="text-2xl font-serif text-white mb-4">Ready to Assess Your Case?</h2>
+                <p class="text-gray-300 mb-6">Start your data privacy assessment today and get expert insights into potential legal implications.</p>
+                <a href="analysis.html" class="inline-block bg-white text-court-primary py-3 px-8 rounded-md hover:bg-gray-100 transition duration-300 font-medium ripple-button">
+                    Begin Assessment
+                </a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="text-center text-gray-500 text-sm">
+            <div class="h-px bg-gray-200 mb-6"></div>
+            <p>© 2025 RA 10173 Legal Assessment System. All rights reserved.</p>
+            <p class="mt-2">This system is for educational and informational purposes only and does not constitute legal advice.</p>
         </footer>
     </div>
 
-    <script src="https://cdn.tailwindcss.com"></script>
     <script src="script.js"></script>
 </body>
 </html>
